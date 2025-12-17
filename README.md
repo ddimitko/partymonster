@@ -3,5 +3,6 @@ I will update it frequently with my progress.
 
 1. Set up a basic Spring Boot project (Done).
 2. Set up GitHub repository (Done).
-3. Set up GitHub Actions (In Progress).
-4. TBD
+3. Set up a Docker container (Done).
+4. Set up GitHub Actions (In Progress).
+5. TBD
