@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Gradle dependencies (build.gradle / build.gradle.kts, settings, etc.)
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # GitHub Actions in .github/workflows/*.yml
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Dockerfiles (and other Docker manifests Dependabot supports in the directory)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
