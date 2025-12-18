@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: partymonster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: partymonster
+  template:
+    metadata:
+      labels:
+        app: partymonster
+    spec:
+      containers:
+        - name: partymonster
+          image: partymonster:dev
+          ports:
+            - containerPort: 80
