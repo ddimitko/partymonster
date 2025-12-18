@@ -20,6 +20,8 @@ services:
       SPRING_MAIL_SMTP_STARTTLS: ${SPRING_MAIL_SMTP_STARTTLS:-false}
       SPRING_MAIL_SSL_ENABLED: ${SPRING_MAIL_SSL_ENABLED:-false}
       APP_MAIL_FROM: ${APP_MAIL_FROM:-noreply@partymonster.com}
+      MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED: "true"
+      MANAGEMENT_OTLP_METRICS_EXPORT_URL: http://grafana-lgtm:4318/v1/metrics
     ports:
       - "8080:8080"
   grafana-lgtm:
@@ -28,7 +30,7 @@ services:
       - '3000'
       - '4317'
       - '4318'
-  postgres:
+  db:
     image: 'postgres:latest'
     env_file:
       - .env
@@ -36,6 +38,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-partyapp}
       POSTGRES_USER: ${POSTGRES_USER:-app_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app_user} -d ${POSTGRES_DB:-partyapp}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
     ports:
       - '5432'
   redis:
