@@ -1,0 +1,23 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+preferences: {}
+
+clusters:
+  - cluster:
+    name: development
+  - cluster:
+    name: test
+
+users:
+  - name: developer
+  - name: tester
+
+contexts:
+  - context:
+    name: dev-backend
+  - context:
+    name: dev-storage
+  - context:
+    name: dev-frontend
+  - context:
+    name: exp-test
