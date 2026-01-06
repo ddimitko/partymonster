@@ -16,4 +16,4 @@ spec:
         - name: partymonster
           image: partymonster:dev
           ports:
-            - containerPort: 80
+            - containerPort: 8080
