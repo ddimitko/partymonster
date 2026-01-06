@@ -120,6 +120,30 @@ Defaults are in `src/main/resources/application.properties`. Override as needed:
 ./gradlew test
 ```
 
-## Kubernetes notes
-- `deployment.yaml` is a minimal deployment stub.
-- `kind-config.yaml` provides a local kind cluster with port mappings for 8080/8443.
+## Kubernetes (kind)
+1) Create a local kind cluster:
+```bash
+kind create cluster --config kind-config.yaml
+```
+
+2) Build and load the image into kind:
+```bash
+docker build -t partymonster:dev .
+kind load docker-image partymonster:dev
+```
+
+3) Deploy the app:
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get pods
+```
+
+4) Access the app:
+```bash
+kubectl port-forward service/partymonster 8080:8080
+```
+
+Notes:
+- `deployment.yaml` is a minimal stub; add env vars, resources, and probes as needed.
+- `kind-config.yaml` maps host ports 8080/8443 to the control-plane node.
